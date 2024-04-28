@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSC Final Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 20px;
+
+        }
+
+        .receipt-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .receipt-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .receipt-item-description {
+            flex: 1;
+        }
+
+        .receipt-item-description p {
+            margin: 0;
+        }
+
+        .receipt-item-description p strong {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .receipt-item-price p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <h1>Home</h1>
+        <div>
+            <form action="{{ url_for('summary', timeframe='short') }}" method="get">
+                <button type="submit">Get My Wrap</button>
+            </form>
+        </div>
+    </div>
+    <!-- Display the receipt -->
+    <div class="container">
+        {% if user_summary %}
+        <h2 class="header">{{user_summary['userid']}} Music Receipt</h2>
+        {% for track in user_summary['top_tracks'] %}
+        <div class="receipt-item">
+            <img src="{{ track['album_img'] }}" alt="Album Art">
+            <div class="receipt-item-description">
+                <p><strong>{{ track['name'] }}</strong></p>
+                <p>{{ track['artist'] }}</p>
+            </div>
+            <div class="receipt-item-price">
+                <p>Duration: {{ track['duration'] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</body>
+
+</html>

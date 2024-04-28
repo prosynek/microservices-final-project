@@ -1,0 +1,1 @@
+MONGO_CLUSTER = 'mongodb+srv://prosynek:crumblyONES!42@csc5201cluster.z9syrj2.mongodb.net/?retryWrites=true&w=majority&appName=CSC5201cluster'

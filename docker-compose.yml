@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  app_service:
+    build:
+      context: ./app_service
+    ports:
+      - "5000:5000"
+    networks:
+      - my_network
+    depends_on:
+      - auth_service
+    image: rosynekp/final_project-app_service:latest
+
+  auth_service:
+    build:
+      context: ./auth_service
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    image: rosynekp/final_project-auth_service:latest
+
+  spotify_service:
+    build:
+      context: ./spotify_service
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    depends_on:
+      - auth_service
+    image: rosynekp/final_project-spotify_service:latest
+    
+networks:
+  my_network:
