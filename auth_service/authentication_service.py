@@ -8,7 +8,7 @@ app = Flask(__name__)
 dashboard.config.init_from(file='auth_config.cfg')
 
 PORT = 8000
-REDIRECT_URI = 'http://localhost:5000/callback'             # redirect back to client
+REDIRECT_URI = 'http://app_service:5000/callback'             # redirect back to client
 SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
 SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token'
 SCOPE = 'user-library-read user-top-read user-read-recently-played user-read-private user-read-email' 
