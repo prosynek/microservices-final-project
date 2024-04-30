@@ -8,7 +8,7 @@ body {
     font-size: 16px;
     background-color: #232222;
     color: #fff;
-    margin: 0;
+    margin-left: 20px;
     padding: 0;
 }
 
@@ -25,6 +25,14 @@ h2 {
     margin-bottom: 20px;
 }
 
+h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #5be860;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 button {
     background-color: #d31185;
     font-family: 'Poppins', sans-serif;
@@ -34,7 +42,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -50,9 +58,67 @@ footer {
     margin-left: 5%;
 }
 .container {
-    margin-left: 5%;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
 }
 
-.recciept-item {
-    margin: 40px
+.receipt-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.receipt-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.receipt-item-details {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-item-description {
+    flex-grow: 1;
+}
+
+.receipt-item-price {
+    margin-left: 20px;
+}
+
+.column-label {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.section-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.radio-buttons {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.button-container {
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.generate-wrap {
+    margin-top: 60px;
+    max-width: 600px;
 }
