@@ -10,76 +10,89 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <style>
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            padding: 20px;
-
-        }
-
-        .receipt-item {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .receipt-item img {
-            width: 80px;
-            height: 80px;
-            border-radius: 4px;
-            margin-right: 20px;
-        }
-
-        .receipt-item-description {
-            flex: 1;
-        }
-
-        .receipt-item-description p {
-            margin: 0;
-        }
-
-        .receipt-item-description p strong {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .receipt-item-price p {
-            margin: 0;
-            font-size: 14px;
-        }
-    </style>
 </head>
 
 <body>
     <div class="header-bar">
-        <h1>Home</h1>
+        <h1>{{ title }}</h1>
         <div>
-            <form action="{{ url_for('summary', timeframe='short') }}" method="get">
-                <button type="submit">Get My Wrap</button>
-            </form>
+            <div class="button-container">
+                <form action="{{ url_for('logout') }}" method="get">
+                    <button type="submit">Logout</button>
+                </form>
+                <form action="{{ url_for('wrap_home') }}" method="get">
+                    <button type="submit">My Saved Wraps</button>
+                </form>
+            </div>
+            <div class="generate-wrap">
+                <form action="{{ url_for('wrap') }}" method="get">
+                    <button type="submit" class="submit-button">Generate My Wrap</button>
+                    <div class="radio-buttons">
+                        <input type="radio" id="short" name="term" value="short" checked>
+                        <label for="short">Short</label>
+                        <input type="radio" id="medium" name="term" value="medium">
+                        <label for="medium">Medium</label>
+                        <input type="radio" id="long" name="term" value="long">
+                        <label for="long">Long</label>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <!-- Display the receipt -->
+    <!-- Display the wrap/receipt -->
+    <div></div>
+    {% if summary %}
     <div class="container">
-        {% if user_summary %}
-        <h2 class="header">{{user_summary['userid']}} Music Receipt</h2>
-        {% for track in user_summary['top_tracks'] %}
+        <div class="section-container">
+            <h3>Top Tracks</h3>
+            <div class="column-label">Duration</div>
+        </div>
+        {% for track in summary['top_tracks'] %}
         <div class="receipt-item">
             <img src="{{ track['album_img'] }}" alt="Album Art">
-            <div class="receipt-item-description">
-                <p><strong>{{ track['name'] }}</strong></p>
-                <p>{{ track['artist'] }}</p>
-            </div>
-            <div class="receipt-item-price">
-                <p>Duration: {{ track['duration'] }}</p>
+            <div class="receipt-item-details">
+                <div class="receipt-item-description">
+                    <p><strong>{{ track['name'] }}</strong><br>{{ track['artist'] }}</p>
+                </div>
+                <div class="receipt-item-price">
+                    {{ track['duration'] }}
+                </div>
             </div>
         </div>
         {% endfor %}
-        {% endif %}
+
+        <div class="section-container">
+            <h3>Top Artists</h3>
+            <div class="column-label">Popularity</div>
+        </div>
+        {% for artist in summary['top_artists'] %}
+        <div class="receipt-item">
+            <img src="{{ artist['image_url'] }}" alt="Artist Image">
+            <div class="receipt-item-details">
+                <div class="receipt-item-description">
+                    <p><strong>{{ artist['name'] }}</strong></p>
+                </div>
+                <div class="receipt-item-price">
+                    {{ artist['popularity'] }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="section-container">
+            <h3>Top Genres</h3>
+            <div class="column-label"></div>
+        </div>
+        <div class="receipt-item">
+            <ul>
+                {% for genre in summary['top_genres'] %}
+                <li>{{ genre }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
     </div>
+    {% endif %}
 </body>
 
 </html>

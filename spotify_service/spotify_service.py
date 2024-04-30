@@ -3,12 +3,18 @@ import requests
 import flask_monitoringdashboard as dashboard
 
 app = Flask(__name__)
-dashboard.config.init_from(file='spotify_config.cfg') # monitoring/spotify_config.cfg
+dashboard.config.init_from(file='spotify_config.cfg')
 
 PORT = 8080
 SPOTIFY_BASE_URL = 'https://api.spotify.com/v1'
 
 def validate_request(auth_header):
+    """
+    Checks if the request header contains a valid access token.
+
+    :param auth_header: authorization header of the request
+    :returns: valid authorization header to be used in request
+    """
     if not auth_header:
         return jsonify({'error' : 'No access token found.'}), 400
     
@@ -19,8 +25,7 @@ def validate_request(auth_header):
 
 @app.route('/user', methods=['GET'])
 def user():
-    print('--------- SPOTIFY USER ---------')
-    headers = validate_request(request.headers.get('Authorization')) # need to handle errors
+    headers = validate_request(request.headers.get('Authorization')) 
     response = requests.get(f'{SPOTIFY_BASE_URL}/me', headers=headers)
 
     if response.status_code == 200:
@@ -31,13 +36,11 @@ def user():
 
 @app.route('/user/top', methods=['GET']) 
 def top():
-    print('--------- SPOTIFY TOP ---------')
-    headers = validate_request(request.headers.get('Authorization')) # need to handle errors
+    headers = validate_request(request.headers.get('Authorization')) 
 
-    # parse request
+    # parse request params
     term = request.args.get('term')
     item_type = request.args.get('type')
-    # print(f'term = {term}, type = {item_type}')
 
     # if params are valid, make request - gets top 10 tracks or artists depending on type
     if (term in ['short_term', 'medium_term', 'long_term']) and (item_type in ['tracks', 'artists']):
@@ -51,7 +54,7 @@ def top():
     else:
         return jsonify({'error' : 'Failed to fetch spotify user data.'}), response.status_code
 
-dashboard.bind(app)
+dashboard.bind(app) # for monitoring dashboard
 
 if __name__ == '__main__':
     app.run(debug=True, host='localhost', port=PORT)
