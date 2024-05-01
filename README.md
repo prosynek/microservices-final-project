@@ -14,6 +14,24 @@ Wrapify is an application that allows users to summarize their listening habits 
 
 ## **Installation**
 
+The application is running at `http://` and no further installation is needed.
+
+
+
+### Run Locally (Docker-Compose)
+
+To run the application locally:
+
+1. Clone this repo using `git clone`
+2. Navigate to the `authentication_service.py` file in the `auth_service` directory
+3. Uncomment the `REDIRECT_URI` constant at the top of the file to `http://localhost:5000` and save
+4. In the project root directory, run:
+- `docker-compose build`
+- `docker-compose up -d`
+
+5. Enter `http://localhost:5000` in your browser to access the running application
+6. To stop the application run: `docker-compose down`
+
 
 ## **Documentation & Use Cases**
 
