@@ -3,6 +3,8 @@
 ##### CSC 5201 301
 ##### 05.03.2024
 
+---
+
 # **Wrapify - Spotify Listening History Summary**
 
 
