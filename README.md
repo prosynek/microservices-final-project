@@ -14,7 +14,7 @@ Wrapify is an application that allows users to summarize their listening habits 
 
 ## **Installation**
 
-The application is running at `http://` and no further installation is needed.
+The application is deployed on a DigitalOcean Droplet running at `http://` so no further installation is needed.
 
 
 
