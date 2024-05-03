@@ -14,7 +14,7 @@ Wrapify is an application that allows users to summarize their listening habits 
 
 ## **Installation**
 
-The application is deployed on a DigitalOcean Droplet running at `http://` so no further installation is needed.
+The application is deployed on a DigitalOcean Droplet running at `http://146.190.166.177:5000` so no further installation is needed.
 
 
 
@@ -32,6 +32,25 @@ To run the application locally:
 5. Enter `http://localhost:5000` in your browser to access the running application
 6. To stop the application run: `docker-compose down`
 
+**NOTE**
+Due to Spotify's developer restrictions, in order to log into the application your Spotify email must be whitelisted. Optionally you can follow the steps to retrieve your own Spotify client credentials at the link here: `https://developer.spotify.com/documentation/web-api/concepts/apps` and replace the CLIENT_ID and CLIENT_SECRET variables in the config.py file in the auth_service directory.
+
 
 ## **Documentation & Use Cases**
 
+### **Endpoints**
+
+#### `/`
+**Method:** `GET`
+
+**Description:** Renders the home page of the application.
+
+#### `/login`
+**Method:** `GET`
+
+**Description:** Initiates the authentication process with Spotify OAuth. Communicates with the authentication service to retrieve an authorization URL from Spotify and redirects the user.
+
+
+#### `/callback`
+**Method:** `GET`
+**Description:** 
