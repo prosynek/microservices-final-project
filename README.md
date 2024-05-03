@@ -33,6 +33,7 @@ To run the application locally:
 6. To stop the application run: `docker-compose down`
 
 **NOTE**
+
 Due to Spotify's developer restrictions, in order to log into the application your Spotify email must be whitelisted. Optionally you can follow the steps to retrieve your own Spotify client credentials at the link here: `https://developer.spotify.com/documentation/web-api/concepts/apps` and replace the CLIENT_ID and CLIENT_SECRET variables in the config.py file in the auth_service directory.
 
 
@@ -41,16 +42,25 @@ Due to Spotify's developer restrictions, in order to log into the application yo
 ### **Endpoints**
 
 #### `/`
-**Method:** `GET`
+- **Method:** `GET`
+- **Description:** Renders the home page of the application.
 
-**Description:** Renders the home page of the application.
 
 #### `/login`
-**Method:** `GET`
-
-**Description:** Initiates the authentication process with Spotify OAuth. Communicates with the authentication service to retrieve an authorization URL from Spotify and redirects the user.
+- **Method:** `GET`
+- **Description:** Initiates the authentication process with Spotify OAuth. Communicates with the authentication service to retrieve an authorization URL from Spotify and redirects the user.
 
 
 #### `/callback`
-**Method:** `GET`
-**Description:** 
+- **Method:** `GET`
+- **Description:** Handles the callback from the Spotify OAuth service after successful authorization. Retrieves the access token and stores it in the session. Redirects the user to the `/userhome` endpoint.
+
+
+#### `/userhome`
+- **Method:** `GET`
+- **Description:** Renders the user's home page. This page allows the user to generate their wrap and navigate to their wrap page.
+
+#### `/wrap?term=<short, medium, long>`
+- **Method:** `GET`
+- **Query Parameters: term** Specifies the time frame to generate a user's wrap for. Valid values are `short` (last ~4 weeks), `medium` (last ~6 months), `long` (last ~1 year)
+- **Description:** Generates a summary ("wrap") with information on the user's top 10 tracks, top 10 artists, and top 5 genres for the specified time frame (term). The summary is rendered directly on the user home page. Returns summary as JSON if not using UI.
